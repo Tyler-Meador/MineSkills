@@ -40,9 +40,9 @@ public class MineSkillsMining {
     public void mineSkillsMiningHandler(){
         PlayerBlockBreakEvents.AFTER.register(((world, player, pos, state, blockEntity) -> {
             if (state.getBlock().equals(Block.getBlockFromItem(Items.COAL_ORE))) {
-                performMiningIncrease(player, 10);
+                performMiningIncrease(player, 5);
             } else if (state.getBlock().equals(Block.getBlockFromItem(Items.DIAMOND_ORE))) {
-                performMiningIncrease(player, 1000);
+                performMiningIncrease(player, 25);
             } else if (state.getBlock().equals(Block.getBlockFromItem(Items.IRON_ORE))){
                 performMiningIncrease(player, 10);
             }
