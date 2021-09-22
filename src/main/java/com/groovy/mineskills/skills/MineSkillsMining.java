@@ -3,13 +3,9 @@ package com.groovy.mineskills.skills;
 import com.groovy.mineskills.MineSkillsInterface;
 import com.groovy.mineskills.registry.ModStats;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 
 import java.util.HashMap;
@@ -25,7 +21,7 @@ public class MineSkillsMining {
 
     private void populateXpMap(){
         int count = 2;
-        long xpDiff=83;
+        long xpDiff = 83;
         long xp = 83;
         totalLvlXpMap.put(0, 0L);
         totalLvlXpMap.put(1, 0L);
@@ -40,11 +36,21 @@ public class MineSkillsMining {
     public void mineSkillsMiningHandler(){
         PlayerBlockBreakEvents.AFTER.register(((world, player, pos, state, blockEntity) -> {
             if (state.getBlock().equals(Block.getBlockFromItem(Items.COAL_ORE))) {
-                performMiningIncrease(player, 5);
-            } else if (state.getBlock().equals(Block.getBlockFromItem(Items.DIAMOND_ORE))) {
-                performMiningIncrease(player, 25);
+                performMiningIncrease(player, 17);
+            } else if (state.getBlock().equals(Block.getBlockFromItem(Items.COPPER_ORE))) {
+                performMiningIncrease(player, 35);
             } else if (state.getBlock().equals(Block.getBlockFromItem(Items.IRON_ORE))){
-                performMiningIncrease(player, 10);
+                performMiningIncrease(player, 40);
+            } else if (state.getBlock().equals(Block.getBlockFromItem(Items.GOLD_ORE))){
+                performMiningIncrease(player, 80);
+            } else if (state.getBlock().equals(Block.getBlockFromItem(Items.REDSTONE_ORE))){
+                performMiningIncrease(player, 85);
+            } else if (state.getBlock().equals(Block.getBlockFromItem(Items.LAPIS_ORE))){
+                performMiningIncrease(player, 100);
+            } else if (state.getBlock().equals(Block.getBlockFromItem(Items.DIAMOND_ORE))){
+                performMiningIncrease(player, 125);
+            } else if (state.getBlock().equals(Block.getBlockFromItem(Items.EMERALD_ORE))){
+                performMiningIncrease(player, 175);
             }
         }));
     }
