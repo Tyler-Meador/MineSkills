@@ -2,7 +2,7 @@ package com.groovy.mineskills;
 
 import com.groovy.mineskills.registry.ModItems;
 import com.groovy.mineskills.registry.ModStats;
-import com.groovy.mineskills.skills.MineSkillsMining;
+import com.groovy.mineskills.skills.MiningSkill;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -15,8 +15,7 @@ public class MineSkills implements ModInitializer {
     public static final String MOD_ID ="mineskills";
 
     //Mining Skill Class
-    public MineSkillsMining mining = new MineSkillsMining();
-
+    public MiningSkill mining = new MiningSkill();
     //Item Group
     public static final ItemGroup MINESKILLS_GROUP = FabricItemGroupBuilder.build(
             new Identifier(MOD_ID, "mine_skills_group"),
