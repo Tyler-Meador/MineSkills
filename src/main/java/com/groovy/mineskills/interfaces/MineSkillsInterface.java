@@ -1,4 +1,4 @@
-package com.groovy.mineskills;
+package com.groovy.mineskills.interfaces;
 
 public interface MineSkillsInterface {
     void addMiningXp(int amount);

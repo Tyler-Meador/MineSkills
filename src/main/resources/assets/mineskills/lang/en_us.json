@@ -1,3 +1,4 @@
 {
-  "stat.mineskills.mining_skill" : "Mining Skill Xp"
+  "stat.mineskills.mining_skill" : "Mining Skill Xp:",
+  "itemGroup.mineskills.mine_skills_group" : "MineSkills"
 }

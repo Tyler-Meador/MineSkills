@@ -1,24 +1,16 @@
 package com.groovy.mineskills.mixin;
 
-import com.groovy.mineskills.MineSkillsInterface;
-import com.groovy.mineskills.registry.ModStats;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.groovy.mineskills.interfaces.MineSkillsInterface;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.stat.Stat;
-import net.minecraft.stat.StatFormatter;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Objects;
 
 @Mixin(PlayerEntity.class)
 public abstract class MineSkillsMixin extends LivingEntity implements MineSkillsInterface {
