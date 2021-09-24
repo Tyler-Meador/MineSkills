@@ -1,6 +1,5 @@
 package com.groovy.mineskills.skills;
 
-import com.groovy.mineskills.MineSkills;
 import com.groovy.mineskills.interfaces.ItemsDroppedInterface;
 import com.groovy.mineskills.interfaces.MineSkillsInterface;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
@@ -11,14 +10,14 @@ import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MiningSkill {
     private final Map<Integer, Long> totalLvlXpMap = new HashMap<>();
     private final Map<Block, Integer> blockXpValues = new HashMap<>();
-    private final ArrayList<Integer> milestoneLevels = new ArrayList<>();
+    private final Map<Block, Integer> miningMilestones = new HashMap<>();
 
     public MiningSkill(){
         populateXpMap();
@@ -27,14 +26,15 @@ public class MiningSkill {
     }
 
     private void populateMilestoneLevels(){
-        milestoneLevels.add(1);//stone/coal
-        milestoneLevels.add(5);//copper
-        milestoneLevels.add(10);//iron
-        milestoneLevels.add(15);//gold
-        milestoneLevels.add(20);//redstone
-        milestoneLevels.add(30);//lapiz
-        milestoneLevels.add(35);//diamond
-        milestoneLevels.add(40);//emerald
+        miningMilestones.put(Block.getBlockFromItem(Items.STONE), 1);
+        miningMilestones.put(Block.getBlockFromItem(Items.COAL_ORE), 1);
+        miningMilestones.put(Block.getBlockFromItem(Items.COPPER_ORE), 5);
+        miningMilestones.put(Block.getBlockFromItem(Items.IRON_ORE), 10);
+        miningMilestones.put(Block.getBlockFromItem(Items.GOLD_ORE), 15);
+        miningMilestones.put(Block.getBlockFromItem(Items.REDSTONE_ORE), 20);
+        miningMilestones.put(Block.getBlockFromItem(Items.LAPIS_ORE), 30);
+        miningMilestones.put(Block.getBlockFromItem(Items.DIAMOND_ORE), 35);
+        miningMilestones.put(Block.getBlockFromItem(Items.EMERALD_ORE), 40);
     }
 
     private void populateXpMap(){
@@ -64,13 +64,19 @@ public class MiningSkill {
     }
 
     public void mineSkillsMiningHandler(){
-        PlayerBlockBreakEvents.AFTER.register(((world, player, pos, state, blockEntity) -> {
+        PlayerBlockBreakEvents.BEFORE.register((((world, player, pos, state, blockEntity) -> {
+            if(miningMilestones.containsKey(state.getBlock())){
+                if(miningMilestones.get(state.getBlock()) > ((MineSkillsInterface)player).getMiningLvl()){
+                    player.sendMessage(Text.of("Your Mining Level is Too Low!!"), true);
+                    return false;
+                }
+            }
             if (blockXpValues.containsKey(state.getBlock())) {
                 performMiningIncrease(player, blockXpValues.get(state.getBlock()), state);
             }
-        }));
+            return true;
+        })));
     }
-
     public void performMiningIncrease(PlayerEntity player, int xp, BlockState state){
         int tempXp = ((ItemsDroppedInterface)state.getBlock()).getItemsDroppedCount() * xp;
         if(tempXp == 0){
@@ -87,8 +93,7 @@ public class MiningSkill {
     public void performLevelUp(PlayerEntity player){
         ((MineSkillsInterface)player).addMiningLvl();
         player.sendMessage(Text.of("Congratulations! Your Mining Level Has Increased To: " + ((MineSkillsInterface)player).getMiningLvl()), true);
-
-        if(milestoneLevels.contains((((MineSkillsInterface)player).getMiningLvl()))){
+        if(miningMilestones.containsValue((((MineSkillsInterface)player).getMiningLvl()))){
             System.out.println("Milestone Level Increase Time");
             int[] temp = new int[1];
             int[] milestone;
