@@ -24,7 +24,6 @@ public class MineSkills implements ModInitializer {
     @Override
     public void onInitialize() {
         mining.mineSkillsMiningHandler();
-        ModStats.registerMining();
         ModItems.registerItems();
     }
 
