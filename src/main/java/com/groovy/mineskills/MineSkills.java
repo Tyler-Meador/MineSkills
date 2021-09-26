@@ -1,7 +1,6 @@
 package com.groovy.mineskills;
 
 import com.groovy.mineskills.registry.ModItems;
-import com.groovy.mineskills.registry.ModStats;
 import com.groovy.mineskills.skills.MiningSkill;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -26,6 +25,4 @@ public class MineSkills implements ModInitializer {
         mining.mineSkillsMiningHandler();
         ModItems.registerItems();
     }
-
-
 }

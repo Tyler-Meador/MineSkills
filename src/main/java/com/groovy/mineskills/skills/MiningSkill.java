@@ -1,91 +1,42 @@
 package com.groovy.mineskills.skills;
 
-import com.groovy.mineskills.interfaces.ItemsDroppedInterface;
 import com.groovy.mineskills.interfaces.MineSkillsInterface;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import com.groovy.mineskills.variables.MineSkillsVariables;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 
+import java.util.Random;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-public class MiningSkill {
-    private final Map<Integer, Long> totalLvlXpMap = new HashMap<>();
-    private final Map<Block, Integer> blockXpValues = new HashMap<>();
-    private final Map<Block, Integer> miningMilestones = new HashMap<>();
+public class MiningSkill extends MineSkillsVariables {
 
     public MiningSkill(){
-        populateXpMap();
-        populateBlockXpValuesMap();
-        populateMilestoneLevels();
-    }
-
-    private void populateMilestoneLevels(){
-        miningMilestones.put(Block.getBlockFromItem(Items.STONE), 1);
-        miningMilestones.put(Block.getBlockFromItem(Items.COAL_ORE), 1);
-        miningMilestones.put(Block.getBlockFromItem(Items.COPPER_ORE), 5);
-        miningMilestones.put(Block.getBlockFromItem(Items.IRON_ORE), 10);
-        miningMilestones.put(Block.getBlockFromItem(Items.GOLD_ORE), 15);
-        miningMilestones.put(Block.getBlockFromItem(Items.REDSTONE_ORE), 20);
-        miningMilestones.put(Block.getBlockFromItem(Items.LAPIS_ORE), 30);
-        miningMilestones.put(Block.getBlockFromItem(Items.DIAMOND_ORE), 35);
-        miningMilestones.put(Block.getBlockFromItem(Items.EMERALD_ORE), 40);
-    }
-
-    private void populateXpMap(){
-        int count = 2;
-        long xpDiff = 83;
-        long xp = 83;
-        totalLvlXpMap.put(0, 0L);
-        totalLvlXpMap.put(1, 0L);
-        while(count < 100){
-            totalLvlXpMap.put(count, xp);
-            xpDiff = (long) (xpDiff * (1.10495));
-            xp += xpDiff;
-            count++;
-        }
-    }
-
-    private void populateBlockXpValuesMap(){
-        blockXpValues.put(Block.getBlockFromItem(Items.STONE), 2);
-        blockXpValues.put(Block.getBlockFromItem(Items.COAL_ORE), 17);
-        blockXpValues.put(Block.getBlockFromItem(Items.COPPER_ORE), 35);
-        blockXpValues.put(Block.getBlockFromItem(Items.IRON_ORE), 40);
-        blockXpValues.put(Block.getBlockFromItem(Items.GOLD_ORE), 80);
-        blockXpValues.put(Block.getBlockFromItem(Items.REDSTONE_ORE), 85);
-        blockXpValues.put(Block.getBlockFromItem(Items.LAPIS_ORE), 100);
-        blockXpValues.put(Block.getBlockFromItem(Items.DIAMOND_ORE), 125);
-        blockXpValues.put(Block.getBlockFromItem(Items.EMERALD_ORE), 175);
     }
 
     public void mineSkillsMiningHandler(){
         PlayerBlockBreakEvents.BEFORE.register((((world, player, pos, state, blockEntity) -> {
-            if(miningMilestones.containsKey(state.getBlock())){
-                if(miningMilestones.get(state.getBlock()) > ((MineSkillsInterface)player).getMiningLvl()){
+            if(super.oreLevelUnlock.containsKey(state.getBlock())){
+                if(super.oreLevelUnlock.get(state.getBlock()) > ((MineSkillsInterface)player).getMiningLvl()){
                     player.sendMessage(Text.of("Your Mining Level is Too Low!!"), true);
                     return false;
                 }
             }
-            if (blockXpValues.containsKey(state.getBlock())) {
-                performMiningIncrease(player, blockXpValues.get(state.getBlock()), state);
+            if (super.blockXpValues.containsKey(state.getBlock())) {
+                performMiningIncrease(player, super.blockXpValues.get(state.getBlock()), state);
+                determineBonus(player, state);
             }
             return true;
         })));
     }
     public void performMiningIncrease(PlayerEntity player, int xp, BlockState state){
-        int tempXp = ((ItemsDroppedInterface)state.getBlock()).getItemsDroppedCount() * xp;
-        if(tempXp == 0){
-            tempXp = xp;
-        }
-        ((MineSkillsInterface)player).addMiningXp(tempXp);
-        player.sendMessage(Text.of("+" + tempXp), false);
+        ((MineSkillsInterface)player).addMiningXp(xp);
+        player.sendMessage(Text.of("+" + xp), false);
 
-        while(((MineSkillsInterface)player).getMiningXp() > totalLvlXpMap.get(((MineSkillsInterface)player).getMiningLvl())){
+        while(((MineSkillsInterface)player).getMiningXp() > super.totalLvlXpMap.get(((MineSkillsInterface)player).getMiningLvl())){
             performLevelUp(player);
         }
     }
@@ -93,23 +44,80 @@ public class MiningSkill {
     public void performLevelUp(PlayerEntity player){
         ((MineSkillsInterface)player).addMiningLvl();
         player.sendMessage(Text.of("Congratulations! Your Mining Level Has Increased To: " + ((MineSkillsInterface)player).getMiningLvl()), true);
-        if(miningMilestones.containsValue((((MineSkillsInterface)player).getMiningLvl()))){
+        if(super.oreLevelUnlock.containsValue((((MineSkillsInterface)player).getMiningLvl()))){
             System.out.println("Milestone Level Increase Time");
             int[] temp = new int[1];
-            int[] milestone;
-            if(((MineSkillsInterface)player).getMiningMilestone() != null){
-                milestone = new int[temp.length + 1];
+            int[] levelUnlock;
+            if(((MineSkillsInterface)player).getOreUnlocks() != null){
+                levelUnlock = new int[temp.length + 1];
             }else{
-                milestone = temp;
+                levelUnlock = temp;
             }
             for(int i : temp){
-                milestone[i] = temp[i];
+                levelUnlock[i] = temp[i];
             }
-            milestone[milestone.length - 1] = ((MineSkillsInterface)player).getMiningLvl();
-            ((MineSkillsInterface)player).setMiningMilestone(milestone);
+            levelUnlock[levelUnlock.length - 1] = ((MineSkillsInterface)player).getMiningLvl();
+            ((MineSkillsInterface)player).setOreUnlocks(levelUnlock);
             player.sendMessage(Text.of("Congratulations! You Reached A New Milestone!: "), false);
         }
 
+    }
+
+    public void determineBonus(PlayerEntity player, BlockState state){
+        Random rn = new Random();
+        int chance;
+        int level = ((MineSkillsInterface)player).getMiningLvl();
+        if(state.getBlock().equals(Block.getBlockFromItem(Items.COAL_ORE))){
+            if( level >= 5) {
+                chance = (rn.nextInt(10) + 1);
+                bonusItem(Items.COAL, chance, player);
+            }else if(level == 4){
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.COAL, chance, player);
+            }
+        } else if(state.getBlock().equals(Block.getBlockFromItem(Items.COPPER_ORE))){
+            if(level >= 13){
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.RAW_COPPER, chance, player);
+            }
+        } else if(state.getBlock().equals((Block.getBlockFromItem(Items.IRON_ORE)))){
+            if(level >= 13){
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.RAW_IRON, chance, player);
+            }
+        } else if(state.getBlock().equals((Block.getBlockFromItem(Items.GOLD_ORE)))) {
+            if (level >= 20) {
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.RAW_GOLD, chance, player);
+            }
+        } else if(state.getBlock().equals((Block.getBlockFromItem(Items.REDSTONE_ORE)))) {
+            if (level >= 27) {
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.REDSTONE, chance, player);
+            }
+        } else if(state.getBlock().equals((Block.getBlockFromItem(Items.LAPIS_ORE)))) {
+            if (level >= 36) {
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.LAPIS_LAZULI, chance, player);
+            }
+        } else if(state.getBlock().equals((Block.getBlockFromItem(Items.DIAMOND_ORE)))) {
+            if (level >= 42) {
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.DIAMOND, chance, player);
+            }
+        } else if(state.getBlock().equals((Block.getBlockFromItem(Items.EMERALD_ORE)))) {
+            if (level >= 49) {
+                chance = rn.nextInt(20) + 1;
+                bonusItem(Items.EMERALD, chance, player);
+            }
+        }
+    }
+
+    public void bonusItem(ItemConvertible item, int chance, PlayerEntity player){
+        if(chance == 1){
+            player.dropItem(item);
+            player.sendMessage(Text.of("You found an extra ore while mining..."), false);
+        }
     }
 
 }

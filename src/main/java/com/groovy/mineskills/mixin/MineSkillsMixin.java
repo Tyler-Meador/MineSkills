@@ -20,7 +20,7 @@ public abstract class MineSkillsMixin extends LivingEntity implements MineSkills
     @Unique
     public int miningLvl = 1;
     @Unique
-    public int[] miningMilestone;
+    public int[] oreUnlocks;
 
 
     protected MineSkillsMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -38,25 +38,25 @@ public abstract class MineSkillsMixin extends LivingEntity implements MineSkills
     public int getMiningLvl(){
         return miningLvl;
     }
-    public int[] getMiningMilestone(){
-        return miningMilestone;
+    public int[] getOreUnlocks(){
+        return oreUnlocks;
     }
 
-    public void setMiningMilestone(int[] miningMilestone) {
-        this.miningMilestone = miningMilestone;
+    public void setOreUnlocks(int[] oreUnlocks) {
+        this.oreUnlocks = oreUnlocks;
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("RETURN"))
     public void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci){
         nbt.putInt("miningXp", this.miningXp);
         nbt.putInt("miningLvl", this.miningLvl);
-        nbt.putIntArray("miningMilestone", this.miningMilestone);
+        nbt.putIntArray("miningMilestone", this.oreUnlocks);
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("RETURN"))
     public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci){
         miningXp = nbt.getInt("miningXp");
         miningLvl = nbt.getInt("miningLvl");
-        miningMilestone = nbt.getIntArray("miningMilestone");
+        oreUnlocks = nbt.getIntArray("miningMilestone");
     }
 }

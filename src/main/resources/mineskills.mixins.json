@@ -4,7 +4,6 @@
   "package": "com.groovy.mineskills.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "BlockItemsDroppedMixin",
     "MineSkillsMixin"
   ],
   "client": [
