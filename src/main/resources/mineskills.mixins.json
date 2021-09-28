@@ -4,7 +4,8 @@
   "package": "com.groovy.mineskills.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "MineSkillsMixin"
+    "MineSkillsMixin",
+    "StructuresConfigAccessor"
   ],
   "client": [
   ],
