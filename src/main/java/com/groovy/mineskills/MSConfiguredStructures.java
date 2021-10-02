@@ -8,9 +8,11 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
 public class MSConfiguredStructures {
     public static ConfiguredStructureFeature<?, ?> CONFIGURED_ORESPIKE = MSStructures.ORESPIKE.configure(DefaultFeatureConfig.DEFAULT);
+    public static ConfiguredStructureFeature<?, ?> CONFIGURED_ORACHALCITE_SPIKE = MSStructures.ORACHALCITE_SPIKE.configure(DefaultFeatureConfig.DEFAULT);
 
     public static void registerConfiguredStructures(){
         Registry<ConfiguredStructureFeature<?,?>> registry = BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE;
         Registry.register(registry, new Identifier(MineSkills.MOD_ID, "configured_orespike"), CONFIGURED_ORESPIKE);
+        Registry.register(registry, new Identifier(MineSkills.MOD_ID, "configured_orichalcite_spike"), CONFIGURED_ORACHALCITE_SPIKE);
     }
 }

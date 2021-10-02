@@ -49,5 +49,13 @@ public class MineSkills implements ModInitializer {
                             context.getGenerationSettings().addBuiltInStructure(MSConfiguredStructures.CONFIGURED_ORESPIKE);
                         }
                 );
+        BiomeModifications.create(new Identifier(MOD_ID, "orachalcite_spike_addition"))
+                .add(
+                        ModificationPhase.ADDITIONS,
+                        BiomeSelectors.all(),
+                        context -> {
+                            context.getGenerationSettings().addBuiltInStructure(MSConfiguredStructures.CONFIGURED_ORACHALCITE_SPIKE);
+                        }
+                );
     }
 }

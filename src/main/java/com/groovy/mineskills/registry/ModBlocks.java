@@ -11,10 +11,16 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block ORICHALCITE_ORE = new Block(FabricBlockSettings.of(Material.METAL).strength(5.0f));
+    public static final Block ORICHALCITE_NODE = new Block(FabricBlockSettings.of(Material.STONE).strength(50.0f));
 
     public static void registerBlocks(){
+        //ORACHALCITE ORE
         Registry.register(Registry.BLOCK, new Identifier(MineSkills.MOD_ID, "orachalcite_ore"), ORICHALCITE_ORE);
         Registry.register(Registry.ITEM, new Identifier(MineSkills.MOD_ID, "orachalcite_ore"), new BlockItem(
                 ORICHALCITE_ORE, new FabricItemSettings().group(MineSkills.MINESKILLS_GROUP)));
+        //ORACHALCITE NODE
+        Registry.register(Registry.BLOCK, new Identifier(MineSkills.MOD_ID, "orachalcite_node"), ORICHALCITE_NODE);
+        Registry.register(Registry.ITEM, new Identifier(MineSkills.MOD_ID, "orachalcite_node"), new BlockItem(
+                ORICHALCITE_NODE, new FabricItemSettings().group(MineSkills.MINESKILLS_GROUP)));
     }
 }
