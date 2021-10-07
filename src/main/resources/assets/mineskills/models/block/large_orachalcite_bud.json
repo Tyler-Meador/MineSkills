@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "mineskills:block/large_orachalcite_bud"
+  }
+}
