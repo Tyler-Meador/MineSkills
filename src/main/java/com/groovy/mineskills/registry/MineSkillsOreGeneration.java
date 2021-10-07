@@ -19,7 +19,7 @@ public class MineSkillsOreGeneration {
     private static final ConfiguredFeature<?, ?> ORE_ORACHALCITE_OVERWORLD = Feature.ORE
             .configure(new OreFeatureConfig(
                     OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-                    ModBlocks.ORICHALCITE_ORE.getDefaultState(),
+                    ModBlocks.ORACHALCITE_ORE.getDefaultState(),
                     3)) // <- vein size
             .range(new RangeDecoratorConfig(
                     // You can also use one of the other height providers if you don't want a uniform distribution

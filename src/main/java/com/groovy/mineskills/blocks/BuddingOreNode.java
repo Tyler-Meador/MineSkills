@@ -1,5 +1,6 @@
 package com.groovy.mineskills.blocks;
 
+import com.groovy.mineskills.registry.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.fluid.Fluids;
@@ -10,11 +11,12 @@ import net.minecraft.util.math.Direction;
 import java.util.Random;
 
 public class BuddingOreNode extends Block {
-    public static final int GROW_CHANCE = 5;
+    public static int chance;
     private static final Direction[] DIRECTIONS = Direction.values();
 
-    public BuddingOreNode(AbstractBlock.Settings settings) {
+    public BuddingOreNode(AbstractBlock.Settings settings, int chance) {
         super(settings);
+        BuddingOreNode.chance = chance;
     }
 
     public PistonBehavior getPistonBehavior(BlockState state) {
@@ -22,23 +24,23 @@ public class BuddingOreNode extends Block {
     }
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (random.nextInt(5) == 0) {
+        if (random.nextInt(chance) == 0) {
             Direction direction = DIRECTIONS[random.nextInt(DIRECTIONS.length)];
             BlockPos blockPos = pos.offset(direction);
             BlockState blockState = world.getBlockState(blockPos);
             Block block = null;
             if (canGrowIn(blockState)) {
-                block = Blocks.SMALL_AMETHYST_BUD;
-            } else if (blockState.isOf(Blocks.SMALL_AMETHYST_BUD) && blockState.get(AmethystClusterBlock.FACING) == direction) {
-                block = Blocks.MEDIUM_AMETHYST_BUD;
-            } else if (blockState.isOf(Blocks.MEDIUM_AMETHYST_BUD) && blockState.get(AmethystClusterBlock.FACING) == direction) {
-                block = Blocks.LARGE_AMETHYST_BUD;
-            } else if (blockState.isOf(Blocks.LARGE_AMETHYST_BUD) && blockState.get(AmethystClusterBlock.FACING) == direction) {
-                block = Blocks.AMETHYST_CLUSTER;
+                block = ModBlocks.SMALL_ORACHALCITE_BUD;
+            } else if (blockState.isOf(ModBlocks.SMALL_ORACHALCITE_BUD) && blockState.get(OreClusterBlock.FACING) == direction) {
+                block = ModBlocks.MEDIUM_ORACHALCITE_BUD;
+            } else if (blockState.isOf(ModBlocks.MEDIUM_ORACHALCITE_BUD) && blockState.get(OreClusterBlock.FACING) == direction) {
+                block = ModBlocks.LARGE_ORACHALCITE_BUD;
+            } else if (blockState.isOf(ModBlocks.LARGE_ORACHALCITE_BUD) && blockState.get(OreClusterBlock.FACING) == direction) {
+                block = ModBlocks.ORACHALCITE_CLUSTER;
             }
 
             if (block != null) {
-                BlockState blockState2 = (BlockState)((BlockState)block.getDefaultState().with(AmethystClusterBlock.FACING, direction)).with(AmethystClusterBlock.WATERLOGGED, blockState.getFluidState().getFluid() == Fluids.WATER);
+                BlockState blockState2 = (BlockState)((BlockState)block.getDefaultState().with(OreClusterBlock.FACING, direction)).with(OreClusterBlock.WATERLOGGED, blockState.getFluidState().getFluid() == Fluids.WATER);
                 world.setBlockState(blockPos, blockState2);
             }
 

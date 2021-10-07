@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "mineskills:block/orachalcite_cluster"
+    "all": "mineskills:block/orachalcite_node"
   }
 }

@@ -8,7 +8,10 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.impl.client.indigo.renderer.render.BlockRenderContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -33,6 +36,13 @@ public class MineSkills implements ModInitializer {
     @Override
     @SuppressWarnings("deprecation")
     public void onInitialize() {
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ORACHALCITE_CLUSTER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SMALL_ORACHALCITE_BUD, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MEDIUM_ORACHALCITE_BUD, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_ORACHALCITE_BUD, RenderLayer.getCutout());
+
+
         mining.mineSkillsMiningHandler();
         ModItems.registerItems();
         ModBlocks.registerBlocks();
