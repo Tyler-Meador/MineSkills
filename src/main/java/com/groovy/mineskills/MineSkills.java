@@ -37,7 +37,6 @@ public class MineSkills implements ModInitializer {
     @SuppressWarnings("deprecation")
     public void onInitialize() {
 
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ORACHALCITE_CLUSTER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SMALL_ORACHALCITE_BUD, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MEDIUM_ORACHALCITE_BUD, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_ORACHALCITE_BUD, RenderLayer.getCutout());
