@@ -52,6 +52,7 @@ public class MineSkills implements ModInitializer, DedicatedServerModInitializer
         ModBlocks.registerBlocks();
         MineSkillsOreGeneration.registerOre();
 
+
         MSStructures.setupAndRegisterStructureFeatures();
         MSConfiguredStructures.registerConfiguredStructures();
 

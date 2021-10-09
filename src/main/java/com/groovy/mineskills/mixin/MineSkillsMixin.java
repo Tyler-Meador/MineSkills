@@ -20,7 +20,7 @@ public abstract class MineSkillsMixin extends LivingEntity implements MineSkills
     @Unique
     public int miningLvl = 1;
     @Unique
-    public int[] oreUnlocks;
+    public int[] oreUnlocks = new int[1];
 
 
     protected MineSkillsMixin(EntityType<? extends LivingEntity> entityType, World world) {

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class MiningSkill extends MineSkillsVariables {
@@ -46,18 +47,14 @@ public class MiningSkill extends MineSkillsVariables {
         player.sendMessage(Text.of("Congratulations! Your Mining Level Has Increased To: " + ((MineSkillsInterface)player).getMiningLvl()), true);
         if(super.oreLevelUnlock.containsValue((((MineSkillsInterface)player).getMiningLvl()))){
             System.out.println("Milestone Level Increase Time");
-            int[] temp = new int[1];
-            int[] levelUnlock;
-            if(((MineSkillsInterface)player).getOreUnlocks() != null){
-                levelUnlock = new int[temp.length + 1];
-            }else{
-                levelUnlock = temp;
-            }
-            for(int i : temp){
-                levelUnlock[i] = temp[i];
-            }
-            levelUnlock[levelUnlock.length - 1] = ((MineSkillsInterface)player).getMiningLvl();
-            ((MineSkillsInterface)player).setOreUnlocks(levelUnlock);
+            int[] levelUnlock = ((MineSkillsInterface)player).getOreUnlocks();
+            System.out.println("lvlunlock - " + levelUnlock.length);
+            int[] temp = new int[levelUnlock.length + 1];
+            System.out.println("temp - " + temp.length);
+            System.arraycopy(levelUnlock, 0, temp, 0, levelUnlock.length);
+            temp[temp.length - 1] = ((MineSkillsInterface)player).getMiningLvl();
+            System.out.println(Arrays.toString(temp));
+            ((MineSkillsInterface)player).setOreUnlocks(temp);
             player.sendMessage(Text.of("Congratulations! You Reached A New Milestone!: "), false);
         }
 
