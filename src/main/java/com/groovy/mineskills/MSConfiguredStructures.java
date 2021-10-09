@@ -7,10 +7,10 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
 public class MSConfiguredStructures {
-    public static ConfiguredStructureFeature<?, ?> CONFIGURED_ORACHALCITE_SPIKE = MSStructures.ORACHALCITE_SPIKE.configure(DefaultFeatureConfig.DEFAULT);
+    public static ConfiguredStructureFeature<?, ?> CONFIGURED_ORACHALCITE_SPAWN_NODE = MSStructures.ORACHALCITE_SPAWN_NODE.configure(DefaultFeatureConfig.DEFAULT);
 
     public static void registerConfiguredStructures(){
         Registry<ConfiguredStructureFeature<?,?>> registry = BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE;
-        Registry.register(registry, new Identifier(MineSkills.MOD_ID, "configured_orachalcite_spike"), CONFIGURED_ORACHALCITE_SPIKE);
+        Registry.register(registry, new Identifier(MineSkills.MOD_ID, "configured_orachalcite_spawn_node"), CONFIGURED_ORACHALCITE_SPAWN_NODE);
     }
 }

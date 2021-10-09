@@ -14,7 +14,7 @@ import net.minecraft.util.registry.Registry;
 public class ModBlocks {
     public static final Block ORACHALCITE_ORE = new Block(FabricBlockSettings.of(Material.METAL).strength(5.0f));
     public static final Block ORACHALCITE_NODE = new BuddingOreNode(FabricBlockSettings.of(Material.METAL).strength(5.0f).ticksRandomly().requiresTool(), 1);
-    public static final Block ORACHALCITE_CLUSTER = new OreClusterBlock(16, 0, FabricBlockSettings.of(Material.METAL).ticksRandomly().strength(1.5f));
+    public static final Block ORACHALCITE_CLUSTER = new OreClusterBlock(16, 0, FabricBlockSettings.of(Material.METAL).ticksRandomly().strength(5.0f));
     public static final Block LARGE_ORACHALCITE_BUD = new OreClusterBlock(12,2, FabricBlockSettings.of(Material.METAL).nonOpaque());
     public static final Block MEDIUM_ORACHALCITE_BUD = new OreClusterBlock(8, 4, FabricBlockSettings.of(Material.METAL).nonOpaque());
     public static final Block SMALL_ORACHALCITE_BUD = new OreClusterBlock(4, 6, FabricBlockSettings.of(Material.METAL).nonOpaque().luminance((state)->{return 4;}));
