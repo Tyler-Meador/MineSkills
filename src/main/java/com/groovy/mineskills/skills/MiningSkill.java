@@ -46,14 +46,10 @@ public class MiningSkill extends MineSkillsVariables {
         ((MineSkillsInterface)player).addMiningLvl();
         player.sendMessage(Text.of("Congratulations! Your Mining Level Has Increased To: " + ((MineSkillsInterface)player).getMiningLvl()), true);
         if(super.oreLevelUnlock.containsValue((((MineSkillsInterface)player).getMiningLvl()))){
-            System.out.println("Milestone Level Increase Time");
             int[] levelUnlock = ((MineSkillsInterface)player).getOreUnlocks();
-            System.out.println("lvlunlock - " + levelUnlock.length);
             int[] temp = new int[levelUnlock.length + 1];
-            System.out.println("temp - " + temp.length);
             System.arraycopy(levelUnlock, 0, temp, 0, levelUnlock.length);
             temp[temp.length - 1] = ((MineSkillsInterface)player).getMiningLvl();
-            System.out.println(Arrays.toString(temp));
             ((MineSkillsInterface)player).setOreUnlocks(temp);
             player.sendMessage(Text.of("Congratulations! You Reached A New Milestone!: "), false);
         }
