@@ -1,5 +1,6 @@
 package com.groovy.mineskills.variables;
 
+import com.groovy.mineskills.registry.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.Items;
 
@@ -25,22 +26,29 @@ public class MineSkillsVariables {
         oreLevelUnlock.put(Block.getBlockFromItem(Items.COPPER_ORE), 5);
         oreLevelUnlock.put(Block.getBlockFromItem(Items.IRON_ORE), 10);
         oreLevelUnlock.put(Block.getBlockFromItem(Items.GOLD_ORE), 15);
-        oreLevelUnlock.put(Block.getBlockFromItem(Items.REDSTONE_ORE), 20);
-        oreLevelUnlock.put(Block.getBlockFromItem(Items.LAPIS_ORE), 30);
-        oreLevelUnlock.put(Block.getBlockFromItem(Items.DIAMOND_ORE), 35);
-        oreLevelUnlock.put(Block.getBlockFromItem(Items.EMERALD_ORE), 40);
+        oreLevelUnlock.put(Block.getBlockFromItem(Items.REDSTONE_ORE), 25);
+        oreLevelUnlock.put(Block.getBlockFromItem(Items.LAPIS_ORE), 35);
+        oreLevelUnlock.put(Block.getBlockFromItem(Items.DIAMOND_ORE), 45);
+        oreLevelUnlock.put(Block.getBlockFromItem(Items.EMERALD_ORE), 50);
+        oreLevelUnlock.put(ModBlocks.ORACHALCITE_CLUSTER, 60);
+        oreLevelUnlock.put(ModBlocks.SMALL_ORACHALCITE_BUD, 60);
+        oreLevelUnlock.put(ModBlocks.MEDIUM_ORACHALCITE_BUD, 60);
+        oreLevelUnlock.put(ModBlocks.LARGE_ORACHALCITE_BUD, 60);
+        oreLevelUnlock.put(ModBlocks.ORACHALCITE_NODE, 70);
     }
 
     private void populateBlockXpValuesMap(){
-        blockXpValues.put(Block.getBlockFromItem(Items.STONE), 2);
-        blockXpValues.put(Block.getBlockFromItem(Items.COAL_ORE), 17);
-        blockXpValues.put(Block.getBlockFromItem(Items.COPPER_ORE), 35);
-        blockXpValues.put(Block.getBlockFromItem(Items.IRON_ORE), 40);
-        blockXpValues.put(Block.getBlockFromItem(Items.GOLD_ORE), 80);
-        blockXpValues.put(Block.getBlockFromItem(Items.REDSTONE_ORE), 85);
-        blockXpValues.put(Block.getBlockFromItem(Items.LAPIS_ORE), 100);
-        blockXpValues.put(Block.getBlockFromItem(Items.DIAMOND_ORE), 125);
-        blockXpValues.put(Block.getBlockFromItem(Items.EMERALD_ORE), 175);
+        blockXpValues.put(Block.getBlockFromItem(Items.STONE), 5);
+        blockXpValues.put(Block.getBlockFromItem(Items.COAL_ORE), 25);
+        blockXpValues.put(Block.getBlockFromItem(Items.COPPER_ORE), 45);
+        blockXpValues.put(Block.getBlockFromItem(Items.IRON_ORE), 65);
+        blockXpValues.put(Block.getBlockFromItem(Items.GOLD_ORE), 100);
+        blockXpValues.put(Block.getBlockFromItem(Items.REDSTONE_ORE), 125);
+        blockXpValues.put(Block.getBlockFromItem(Items.LAPIS_ORE), 200);
+        blockXpValues.put(Block.getBlockFromItem(Items.DIAMOND_ORE), 375);
+        blockXpValues.put(Block.getBlockFromItem(Items.EMERALD_ORE), 500);
+        blockXpValues.put(ModBlocks.ORACHALCITE_CLUSTER, 750);
+
     }
 
     private void populateXpMap(){

@@ -12,18 +12,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
-    public static final Block ORACHALCITE_ORE = new Block(FabricBlockSettings.of(Material.METAL).strength(5.0f));
     public static final Block ORACHALCITE_NODE = new BuddingOreNode(FabricBlockSettings.of(Material.METAL).strength(5.0f).ticksRandomly().requiresTool(), 1);
     public static final Block ORACHALCITE_CLUSTER = new OreClusterBlock(16, 0, FabricBlockSettings.of(Material.METAL).ticksRandomly().strength(5.0f));
     public static final Block LARGE_ORACHALCITE_BUD = new OreClusterBlock(12,2, FabricBlockSettings.of(Material.METAL).nonOpaque());
     public static final Block MEDIUM_ORACHALCITE_BUD = new OreClusterBlock(8, 4, FabricBlockSettings.of(Material.METAL).nonOpaque());
     public static final Block SMALL_ORACHALCITE_BUD = new OreClusterBlock(4, 6, FabricBlockSettings.of(Material.METAL).nonOpaque().luminance((state)->{return 4;}));
+    public static final Block DRAKOLITH_ORE = new Block(FabricBlockSettings.of(Material.STONE).strength(5.0f));
 
     public static void registerBlocks(){
-        //ORACHALCITE ORE
-        Registry.register(Registry.BLOCK, new Identifier(MineSkills.MOD_ID, "orachalcite_ore"), ORACHALCITE_ORE);
-        Registry.register(Registry.ITEM, new Identifier(MineSkills.MOD_ID, "orachalcite_ore"), new BlockItem(
-                ORACHALCITE_ORE, new FabricItemSettings().group(MineSkills.MINESKILLS_GROUP)));
 
         //ORACHALCITE NODE
         Registry.register(Registry.BLOCK, new Identifier(MineSkills.MOD_ID, "orachalcite_node"), ORACHALCITE_NODE);
@@ -46,5 +42,9 @@ public class ModBlocks {
         Registry.register(Registry.ITEM, new Identifier(MineSkills.MOD_ID, "small_orachalcite_bud"), new BlockItem(
                 SMALL_ORACHALCITE_BUD, new FabricItemSettings().group(MineSkills.MINESKILLS_GROUP)));
 
+        //Drakolith Ore
+        Registry.register(Registry.BLOCK, new Identifier(MineSkills.MOD_ID, "drakolith_ore"), DRAKOLITH_ORE);
+        Registry.register(Registry.ITEM, new Identifier(MineSkills.MOD_ID, "drakolith_ore"), new BlockItem(
+                DRAKOLITH_ORE, new FabricItemSettings().group(MineSkills.MINESKILLS_GROUP)));
     }
 }

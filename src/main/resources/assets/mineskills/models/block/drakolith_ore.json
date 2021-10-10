@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "mineskills:block/orachalcite_ore"
+    "all": "mineskills:block/drakolith_ore"
   }
 }

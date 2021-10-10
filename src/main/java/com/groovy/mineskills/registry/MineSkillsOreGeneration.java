@@ -13,25 +13,26 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.heightprovider.HeightProvider;
 import net.minecraft.world.gen.heightprovider.UniformHeightProvider;
 
 public class MineSkillsOreGeneration {
-    private static final ConfiguredFeature<?, ?> ORE_ORACHALCITE_OVERWORLD = Feature.ORE
+    private static final ConfiguredFeature<?, ?> ORE_DRAKOLITH_OVERWORLD = Feature.ORE
             .configure(new OreFeatureConfig(
-                    OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-                    ModBlocks.ORACHALCITE_ORE.getDefaultState(),
-                    3)) // <- vein size
+                    OreFeatureConfig.Rules.STONE_ORE_REPLACEABLES,
+                    ModBlocks.DRAKOLITH_ORE.getDefaultState(),
+                    8)) // <- vein size
             .range(new RangeDecoratorConfig(
                     // You can also use one of the other height providers if you don't want a uniform distribution
-                    UniformHeightProvider.create(YOffset.aboveBottom(60), YOffset.fixed(128)))) // Inclusive min and max height
+                    UniformHeightProvider.create(YOffset.aboveBottom(1), YOffset.fixed(16)))) // Inclusive min and max height
             .spreadHorizontally()
-            .repeat(200); // Number of veins per chunk
+            .repeat(1); // Number of veins per chunk
 
     public static void registerOre(){
-        RegistryKey<ConfiguredFeature<?, ?>> oreOrachalciteOverworld = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY,
-                new Identifier("mineskills", "ore_orachalcite_overworld"));
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreOrachalciteOverworld.getValue(), ORE_ORACHALCITE_OVERWORLD);
-        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreOrachalciteOverworld);
+        RegistryKey<ConfiguredFeature<?, ?>> oreDrakolithOverworld = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY,
+                new Identifier("mineskills", "ore_drakolith_overworld"));
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreDrakolithOverworld.getValue(), ORE_DRAKOLITH_OVERWORLD);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreDrakolithOverworld);
     }
 
 

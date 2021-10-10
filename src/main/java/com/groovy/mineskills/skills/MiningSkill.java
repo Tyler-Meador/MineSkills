@@ -1,6 +1,8 @@
 package com.groovy.mineskills.skills;
 
 import com.groovy.mineskills.interfaces.MineSkillsInterface;
+import com.groovy.mineskills.registry.ModBlocks;
+import com.groovy.mineskills.registry.ModItems;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -102,6 +104,11 @@ public class MiningSkill extends MineSkillsVariables {
             if (level >= 49) {
                 chance = rn.nextInt(20) + 1;
                 bonusItem(Items.EMERALD, chance, player);
+            }
+        } else if(state.getBlock().equals(ModBlocks.ORACHALCITE_CLUSTER)){
+            if(level >= 62){
+                chance = rn.nextInt(20) + 1;
+                bonusItem(ModItems.RAW_ORACHALCITE, chance, player);
             }
         }
     }

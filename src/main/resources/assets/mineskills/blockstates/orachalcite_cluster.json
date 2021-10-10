@@ -1,20 +1,20 @@
 {
   "variants": {
     "facing=down": {
-      "model": "mineskills:block/ora_cluster",
+      "model": "mineskills:block/orachalcite_cluster",
       "x": 180
     },
     "facing=east": {
-      "model": "mineskills:block/ora_cluster",
+      "model": "mineskills:block/orachalcite_cluster",
       "x": 90,
       "y": 90
     },
     "facing=north": {
-      "model": "mineskills:block/ora_cluster",
+      "model": "mineskills:block/orachalcite_cluster",
       "x": 90
     },
     "facing=south": {
-      "model": "mineskills:block/ora_cluster",
+      "model": "mineskills:block/orachalcite_cluster",
       "x": 90,
       "y": 180
     },
